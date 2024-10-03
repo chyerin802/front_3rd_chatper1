@@ -8,7 +8,7 @@ export const App = ({ targetPage }) => {
 	const error = globalStore.getState().error;
 
 	return (
-		<div>
+		<>
 			{<PageComponent />}
 			{error && (
 				<div
@@ -29,6 +29,6 @@ export const App = ({ targetPage }) => {
 					</div>
 				</div>
 			)}
-		</div>
+		</>
 	);
 };
