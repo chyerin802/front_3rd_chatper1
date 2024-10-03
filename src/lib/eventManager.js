@@ -25,11 +25,16 @@ function handleEvent(event) {
 	// 이를 통해 하위 요소에서 발생한 이벤트를 상위에서 효율적으로 처리할 수 있습니다.
 }
 
-// TODO: addEvent 함수 구현
-export function addEvent(element, eventType, handler) {
-	// 1. eventMap에 이벤트 타입과 요소, 핸들러 정보 저장
-	// 2. 필요한 경우 루트 요소에 새 이벤트 리스너 추가
-	// 이 함수를 통해 개별 요소에 직접 이벤트를 붙이지 않고도 이벤트 처리 가능
+/**
+ * eventMap에 이벤트의 타입, target이 되는 요소, 이벤트 핸들러 정보를 저장한다.
+ */
+export function addEvent(targetElement, eventType, handler) {
+	// 새로 저장되는 eventType 이라면 그 타입에 해당하는 새로운 Map 을 생성
+	if (!eventMap.has(eventType)) eventMap.set(eventType, new Map());
+
+	// eventMap 에서 eventType에 해당하는 handlerMap을 찾아 타겟 요소와 핸들러 정보를 저장한다.
+	const handlerMap = eventMap.get(eventType);
+	handlerMap.set(targetElement, handler);
 }
 
 // TODO: removeEvent 함수 구현
