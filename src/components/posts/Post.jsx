@@ -1,7 +1,7 @@
 /** @jsx createVNode */
 import { createVNode } from '../../lib';
 
-export const Post = ({ author, time, content }) => (
+export const Post = ({ author, time, content, id }) => (
 	<div class="bg-white rounded-lg shadow p-4 mb-4">
 		<div class="flex items-center mb-2">
 			<img
@@ -16,7 +16,7 @@ export const Post = ({ author, time, content }) => (
 		</div>
 		<p>{content}</p>
 		<div class="mt-2 flex justify-between text-gray-500">
-			<span class="like-button" data-post-id="${id}">
+			<span class="like-button" data-post-id={id}>
 				좋아요
 			</span>
 			<span>댓글</span>
