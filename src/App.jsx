@@ -1,5 +1,7 @@
 /** @jsx createVNode */
+/** @jsxFrag Fragment */
 import { createVNode } from './lib';
+import { Fragment } from './components';
 import { globalStore } from './stores';
 import { NotFoundPage } from './pages';
 
