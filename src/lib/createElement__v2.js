@@ -1,11 +1,9 @@
-// 이 함수는 createElement의 개선된 버전입니다.
-// 1. falsy vNode 처리
-// 2. 문자열 또는 숫자 vNode 처리
-// 3. 배열 vNode 처리 (DocumentFragment 사용)
-// 4. 일반 요소 vNode 처리:
-//    - 요소 생성
-//    - 속성 설정 (이벤트 함수를 이벤트 위임 방식으로 등록할 수 있도록 개선)
-//    - 자식 요소 추가
+import { addEvent } from './eventManager';
+
+/**
+ * createElemnt 의 개선된 버전
+ * - 이벤트 핸들러에 이벤트 위임 방식을 적용
+ */
 export function createElement__v2(vNode) {
 	// 1. 렌더링되지 않는 값에 대해서는 빈 텍스트 노드를 반환
 	if (vNode === null || vNode === undefined || typeof vNode === 'boolean') {
@@ -40,10 +38,10 @@ export function createElement__v2(vNode) {
 	// (2) props 처리 (예: className, 이벤트 핸들러, 일반 속성)
 	if (vNode.props) {
 		Object.entries(vNode.props).forEach(([propName, propValue]) => {
-			// 이벤트 핸들러 (onClick 등)
+			// 이벤트 핸들러 (onClick 등) - 이벤트 위임 방식으로 등록
 			if (propName.startsWith('on') && typeof propValue === 'function') {
 				const eventType = propName.slice(2).toLowerCase();
-				domElement.addEventListener(eventType, propValue);
+				addEvent(domElement, eventType, propValue);
 			}
 			// className 처리
 			else if (propName === 'className') {
