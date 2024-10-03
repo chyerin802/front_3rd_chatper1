@@ -1,5 +1,7 @@
 /** @jsx createVNode */
+/** @jsxFrag Fragment */
 import { createVNode } from '../../lib';
+import { Fragment } from '../base';
 
 const getNavItemClass = (path) => {
 	const currentPath = window.location.pathname;
