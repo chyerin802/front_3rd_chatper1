@@ -37,19 +37,19 @@ export function createElement__v2(vNode) {
 
 	// (2) props 처리 (예: className, 이벤트 핸들러, 일반 속성)
 	if (vNode.props) {
-		Object.entries(vNode.props).forEach(([propName, propValue]) => {
+		Object.entries(vNode.props).forEach(([attr, value]) => {
 			// 이벤트 핸들러 (onClick 등) - 이벤트 위임 방식으로 등록
-			if (propName.startsWith('on') && typeof propValue === 'function') {
-				const eventType = propName.slice(2).toLowerCase();
-				addEvent(domElement, eventType, propValue);
+			if (attr.startsWith('on') && typeof value === 'function') {
+				const eventType = attr.slice(2).toLowerCase();
+				addEvent(domElement, eventType, value);
 			}
 			// className 처리
-			else if (propName === 'className') {
-				domElement.className = propValue;
+			else if (attr === 'className') {
+				domElement.setAttribute('class', value);
 			}
 			// 기타 속성 처리 (예: href, id, data-* 등)
 			else {
-				domElement.setAttribute(propName, propValue);
+				domElement.setAttribute(attr, value);
 			}
 		});
 	}
